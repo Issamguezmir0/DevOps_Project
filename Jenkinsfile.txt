@@ -1,0 +1,51 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_HUB_CREDENTIALS = credentials('docker-hub-credentials-id') // Remplacez par l'ID de vos identifiants Docker Hub dans Jenkins
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                script {
+                    // Construire le projet avec Maven
+                    sh 'mvn clean package'
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                script {
+                    // Exécuter les tests unitaires
+                    sh 'mvn test'
+                }
+            }
+        }
+
+        stage('Docker Build & Push') {
+            steps {
+                script {
+                    // Construire l'image Docker
+                    sh 'docker build -t your-dockerhub-username/foyer-app .'
+
+                    // Connexion à Docker Hub
+                    sh "echo $DOCKER_HUB_CREDENTIALS_PSW | docker login -u $DOCKER_HUB_CREDENTIALS_USR --password-stdin"
+
+                    // Pousser l'image vers Docker Hub
+                    sh 'docker push your-dockerhub-username/foyer-app'
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                script {
+                    // Lancer l'application et la base de données en utilisant Docker Compose
+                    sh 'docker-compose up -d'
+                }
+            }
+        }
+    }
+}
