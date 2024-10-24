@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Récupération du code') {
             steps {
-                git 'https://github.com/Issamguezmir0/DevOps_Project.git'
+                // Checkout the specific branch in one step
                 git branch: 'moduleBloc-Sarra', url: 'https://github.com/Issamguezmir0/DevOps_Project.git'
             }
         }
