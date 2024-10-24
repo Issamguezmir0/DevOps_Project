@@ -2,20 +2,24 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.1.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>tn.esprit.spring</groupId>
     <artifactId>Foyer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Foyer</name>
     <description>Foyer</description>
+
     <properties>
         <java.version>17</java.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -46,6 +50,20 @@
             <version>2.0.0</version>
         </dependency>
     </dependencies>
+
+    <!-- Ajout de la section distributionManagement pour Nexus -->
+    <distributionManagement>
+        <repository>
+            <id>deploymentRepo</id>
+            <name>Nexus Release Repository</name>
+            <url>http://192.168.33.10:8081/repository/releases/</url> <!-- URL corrigée -->
+        </repository>
+        <snapshotRepository>
+            <id>deploymentRepo</id>
+            <name>Nexus Snapshot Repository</name>
+            <url>http://192.168.33.10:8081/repository/snapshots/</url> <!-- URL corrigée -->
+        </snapshotRepository>
+    </distributionManagement>
 
     <build>
         <plugins>
