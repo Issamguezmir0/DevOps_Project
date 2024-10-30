@@ -49,6 +49,36 @@ pipeline {
                 echo "Déploiement de l'image ${DOCKER_IMAGE}:${DOCKER_TAG}"
             }
         }
+        stage('MVN package') {
+            steps {
+                echo 'Running Maven package...'
+                sh 'mvn package -DskipTests'
+            }
+        }
+        
+        stage('MVN build') {
+            steps {
+                echo 'Running Maven install...'
+                sh 'mvn install -DskipTests'
+            }
+        }
+
+        stage('Upload Artifacts to Nexus') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'nexuslogin', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+                        echo 'Deploying artifacts to Nexus...'
+                        sh """
+                            mvn deploy \
+                            -DskipTests \
+                            -DaltDeploymentRepository=deploymentRepo::default::http://10.0.0.10:8081/repository/maven-releases/ \
+                            -Dnexus.username=${NEXUS_USERNAME} \
+                            -Dnexus.password=${NEXUS_PASSWORD}
+                        """
+                    }
+                }
+            }
+        }
     }
     
     post {
