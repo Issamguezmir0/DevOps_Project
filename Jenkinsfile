@@ -69,13 +69,13 @@ pipeline {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'nexuslogin', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
                         echo 'Deploying artifacts to Nexus...'
-                        sh """
+                        sh '''
                             mvn deploy \
                             -DskipTests \
-                            -DaltDeploymentRepository=deploymentRepo::default::http://10.0.0.10:8081/repository/maven-releases/ \
-                            -Dnexus.username=${NEXUS_USERNAME} \
-                            -Dnexus.password=${NEXUS_PASSWORD}
-                        """
+                            -DaltDeploymentRepository=nexuslogin::default::http://10.0.0.10:8081/repository/maven-snapshots/ \
+                            -Dnexus.username="$NEXUS_USERNAME" \
+                            -Dnexus.password="$NEXUS_PASSWORD"
+                        '''
                     }
                 }
             }
