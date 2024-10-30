@@ -42,7 +42,7 @@ pipeline {
             }
         }
         
-        /*stage('Construction Image Docker') {
+        stage('Construction Image Docker') {
             steps {
                 script {
                     docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}")
@@ -65,7 +65,15 @@ pipeline {
             steps {
                 echo "Déploiement de l'image ${DOCKER_IMAGE}:${DOCKER_TAG}"
             }
-        }*/
+        }
+        stage('MVN SONARQUBE') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'sonarqube-credentials', usernameVariable: 'SONAR_USER', passwordVariable: 'SONAR_PASS')]) {
+                    echo 'Running SonarQube analysis...'
+                    sh 'mvn sonar:sonar -Dsonar.login=$SONAR_USER -Dsonar.password=$SONAR_PASS -Dsonar.host.url=http://10.0.0.10:9000'
+                }
+            }
+        }
         stage('Upload Artifacts to Nexus') {
             steps {
                 script {
