@@ -12,7 +12,7 @@
 
     <groupId>tn.esprit.spring</groupId>
     <artifactId>Foyer</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>Foyer</name>
     <description>Foyer</description>
 
