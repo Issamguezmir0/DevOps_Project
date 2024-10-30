@@ -41,7 +41,7 @@ pipeline {
             }
         }
         
-        stage('Construction Image Docker') {
+        /*stage('Construction Image Docker') {
             steps {
                 script {
                     docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}")
@@ -64,7 +64,7 @@ pipeline {
             steps {
                 echo "Déploiement de l'image ${DOCKER_IMAGE}:${DOCKER_TAG}"
             }
-        }
+        }*/
         stage('Upload Artifacts to Nexus') {
             steps {
                 script {
