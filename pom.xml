@@ -18,6 +18,13 @@
 
     <properties>
         <java.version>17</java.version>
+
+        <!-- SonarQube Properties -->
+        <sonar.projectKey>tn.esprit.spring:Foyer</sonar.projectKey>
+        <sonar.projectName>Foyer</sonar.projectName>
+        <sonar.projectVersion>0.0.1-SNAPSHOT</sonar.projectVersion>
+        <sonar.host.url>http://192.168.33.10:9000</sonar.host.url>
+        <sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
     </properties>
 
     <dependencies>
