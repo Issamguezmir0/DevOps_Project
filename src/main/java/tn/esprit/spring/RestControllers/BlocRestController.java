@@ -3,6 +3,7 @@ package tn.esprit.spring.RestControllers;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.spring.DAO.Entities.Bloc;
+import tn.esprit.spring.DAO.Entities.TypeChambre;
 import tn.esprit.spring.Services.Bloc.IBlocService;
 
 import java.util.List;
@@ -44,7 +45,18 @@ public class BlocRestController {
     }
 
     @PutMapping("affecterBlocAFoyer")
-    Bloc affecterBlocAFoyer(@RequestParam String nomBloc,@RequestParam String nomFoyer){
-        return service.affecterBlocAFoyer(nomBloc,nomFoyer);
+    Bloc affecterBlocAFoyer(@RequestParam String nomBloc, @RequestParam String nomFoyer) {
+        return service.affecterBlocAFoyer(nomBloc, nomFoyer);
+    }
+
+    // New Methods
+    @GetMapping("findBlocsWithCapacityGreaterThan")
+    List<Bloc> findBlocsWithCapacityGreaterThan(@RequestParam long capacity) {
+        return service.findBlocsWithCapacityGreaterThan(capacity);
+    }
+
+    @GetMapping("findBlocsByTypeChambreGroupedByCapacity")
+    List<Bloc> findBlocsByTypeChambreGroupedByCapacity(@RequestParam TypeChambre typeChambre) {
+        return service.findBlocsByTypeChambreGroupedByCapacity(typeChambre);
     }
 }
