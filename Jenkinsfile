@@ -13,11 +13,26 @@ pipeline {
             }
         }
         
-        stage('Nettoyage') {
+        stage('MVN clean') {
             steps {
+                echo 'Running Maven clean...'
                 sh 'mvn clean'
             }
         }
+                stage('MVN package') {
+            steps {
+                echo 'Running Maven package...'
+                sh 'mvn package -DskipTests'
+            }
+        }
+        
+        stage('MVN build') {
+            steps {
+                echo 'Running Maven install...'
+                sh 'mvn install -DskipTests'
+            }
+        }
+
         
         stage('Construction') {
             steps {
@@ -49,20 +64,6 @@ pipeline {
                 echo "Déploiement de l'image ${DOCKER_IMAGE}:${DOCKER_TAG}"
             }
         }
-        stage('MVN package') {
-            steps {
-                echo 'Running Maven package...'
-                sh 'mvn package -DskipTests'
-            }
-        }
-        
-        stage('MVN build') {
-            steps {
-                echo 'Running Maven install...'
-                sh 'mvn install -DskipTests'
-            }
-        }
-
         stage('Upload Artifacts to Nexus') {
             steps {
                 script {
