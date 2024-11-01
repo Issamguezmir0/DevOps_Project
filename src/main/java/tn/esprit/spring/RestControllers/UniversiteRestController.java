@@ -2,9 +2,7 @@ package tn.esprit.spring.RestControllers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import tn.esprit.spring.DAO.Entities.Foyer;
 import tn.esprit.spring.DAO.Entities.Universite;
-import tn.esprit.spring.Services.Foyer.IFoyerService;
 import tn.esprit.spring.Services.Universite.IUniversiteService;
 
 import java.util.List;
@@ -13,32 +11,43 @@ import java.util.List;
 @RequestMapping("universite")
 @AllArgsConstructor
 public class UniversiteRestController {
+
     IUniversiteService service;
 
     @PostMapping("addOrUpdate")
-    Universite addOrUpdate(@RequestBody Universite u) {
+    public Universite addOrUpdate(@RequestBody Universite u) {
         return service.addOrUpdate(u);
     }
 
     @GetMapping("findAll")
-    List<Universite> findAll() {
+    public List<Universite> findAll() {
         return service.findAll();
     }
 
     @GetMapping("findById")
-    Universite findById(@RequestParam long id) {
+    public Universite findById(@RequestParam long id) {
         return service.findById(id);
     }
 
     @DeleteMapping("delete")
-    void delete(@RequestBody Universite u) {
+    public void delete(@RequestBody Universite u) {
         service.delete(u);
     }
 
     @DeleteMapping("deleteById")
-    void deleteById(@RequestParam long id) {
+    public void deleteById(@RequestParam long id) {
         service.deleteById(id);
     }
 
+    // New functionality 1: Find universities by foyer ID and student enrollment status
+    @GetMapping("findByFoyerAndStudentStatus")
+    public List<Universite> findByFoyerAndStudentStatus(@RequestParam long foyerId, @RequestParam String status) {
+        return service.findUniversitesByFoyerAndStudentStatus(foyerId, status);
+    }
 
+    // New functionality 2: Count universities by address
+    @GetMapping("countByAddress")
+    public long countByAddress(@RequestParam String adresse) {
+        return service.countUniversitiesByAddress(adresse);
+    }
 }
