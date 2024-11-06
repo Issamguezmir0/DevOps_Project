@@ -24,8 +24,7 @@
 
     <properties>
         <java.version>17</java.version>
-        <!-- Define JUnit version for flexibility -->
-        <junit.jupiter.version>5.8.1</junit.jupiter.version>
+        <junit.jupiter.version>5.9.3</junit.jupiter.version> <!-- Version de JUnit -->
     </properties>
 
     <dependencies>
@@ -39,8 +38,9 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version> <!-- Version ajoutée -->
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -67,12 +67,6 @@
                     <artifactId>junit-vintage-engine</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.9.3</version>
-            <scope>test</scope>
         </dependency>
 
         <!-- OpenAPI Documentation -->
@@ -124,7 +118,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
+                <version>3.0.0</version>
                 <configuration>
                     <includes>
                         <include>**/*Test.java</include>
