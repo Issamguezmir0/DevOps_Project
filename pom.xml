@@ -12,7 +12,6 @@
         <repository>
             <id>projetdevops</id>
             <url>http://192.168.33.10:8082/repository/projetdevops/</url>
-
         </repository>
     </distributionManagement>
 
@@ -48,6 +47,15 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+            <scope>runtime</scope>
         </dependency>
 
         <!-- H2 Database for Testing -->
