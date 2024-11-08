@@ -1,4 +1,3 @@
-pipeline docker 
 pipeline {
     agent any
     
