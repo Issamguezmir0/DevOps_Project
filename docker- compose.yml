@@ -15,7 +15,7 @@ services:
   app-foyer:
     depends_on:
       - mysqldb
-    image: manel244/foyerproject:latest
+    image: manel244/foyerproject
     restart: on-failure
     ports:
       - 8081:8081
