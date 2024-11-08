@@ -9,9 +9,11 @@ pipeline {
     }
     
     stages {
-        stage('Récupération du code') {
+        stage('Getting code from GITHUB') {
             steps {
-                git branch: 'moduleBloc-Sarra', url: 'https://github.com/Issamguezmir0/DevOps_Project.git'
+                echo 'Pulling code from GitHub...'
+                git branch: 'moduleBloc-Sarra',  // Correction de la branche ici
+                url: 'https://github.com/Issamguezmir0/DevOps_Project.git'
             }
         }
         
@@ -34,8 +36,26 @@ pipeline {
                 sh 'mvn install -DskipTests'
             }
         }
-
-        
+        stage('MVN compile') {
+              steps {
+                echo 'Running Maven compile...'
+                sh 'mvn compile'
+              }
+        }
+        stage('Run Unit Tests') {
+              steps {
+                echo 'Running unit tests...'
+                sh 'mvn test'
+              }
+        }
+        stage('MVN SONARQUBE') {
+               steps {
+                    withCredentials([usernamePassword(credentialsId: 'sonarqube-credentials', usernameVariable: 'SONAR_USER', passwordVariable: 'SONAR_PASS')]) {
+                         echo 'Running SonarQube analysis...'
+                         sh 'mvn sonar:sonar -Dsonar.login=$SONAR_USER -Dsonar.password=$SONAR_PASS -Dsonar.host.url=http://10.0.0.10:9000'
+                    }
+               }
+        }
         stage('Construction') {
             steps {
                 sh 'mvn package -DskipTests'
@@ -82,7 +102,7 @@ pipeline {
                         sh '''
                             mvn deploy \
                             -DskipTests \
-                            -DaltDeploymentRepository=nexuslogin::default::http://10.0.0.10:8081/repository/maven-snapshots/ \
+                            -DaltDeploymentRepository=nexuslogin::default::http://10.0.0.10:8081/repository/maven-releases/ \
                             -Dnexus.username="$NEXUS_USERNAME" \
                             -Dnexus.password="$NEXUS_PASSWORD"
                         '''
