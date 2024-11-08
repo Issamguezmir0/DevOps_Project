@@ -93,7 +93,7 @@ pipeline {
                         sh '''
                             mvn deploy \
                             -DskipTests \
-                            -DaltDeploymentRepository=nexuslogin::default::http://10.0.0.10:8081/repository/maven-releases/ \
+                            -DaltDeploymentRepository=nexuslogin::default::http://10.0.0.10:8081/repository/maven-snapshots/ \
                             -Dnexus.username="$NEXUS_USERNAME" \
                             -Dnexus.password="$NEXUS_PASSWORD"
                         '''

@@ -68,7 +68,7 @@
         <repository>
             <id>nexuslogin</id>
             <name>NexusRepository</name>
-            <url>http://10.0.0.10:8081/repository/maven-releases/</url>
+            <url>http://10.0.0.10:8081/repository/maven-snapshots/</url>
         </repository>
     </distributionManagement>
     <build>
