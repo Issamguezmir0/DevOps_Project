@@ -85,6 +85,14 @@ pipeline {
                 echo "Déploiement de l'image ${DOCKER_IMAGE}:${DOCKER_TAG}"
             }
         }
+        stage('Deploy with Docker Compose') {
+                    steps {
+                        echo 'Starting Docker Compose...'
+                        sh """
+                            docker compose up -d
+                        """
+                    }
+        }
         stage('Upload Artifacts to Nexus') {
             steps {
                 script {
