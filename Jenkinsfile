@@ -89,7 +89,7 @@ pipeline {
             steps {
                 echo 'Starting Docker Compose...'
                 sh '''
-                    docker rm -f mysqldb || true  
+                    docker rm -f mysqldb app-foyer || true
                     docker compose up -d
                 '''
             }
