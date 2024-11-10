@@ -86,13 +86,15 @@ pipeline {
             }
         }
         stage('Deploy with Docker Compose') {
-                    steps {
-                        echo 'Starting Docker Compose...'
-                        sh """
-                            docker compose up -d
-                        """
-                    }
+            steps {
+                echo 'Starting Docker Compose...'
+                sh '''
+                    docker rm -f mysqldb || true  
+                    docker compose up -d
+                '''
+            }
         }
+
         stage('Upload Artifacts to Nexus') {
             steps {
                 script {
