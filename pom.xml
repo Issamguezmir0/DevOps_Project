@@ -15,6 +15,11 @@
     <description>Foyer</description>
     <properties>
         <java.version>17</java.version>
+        <sonar.projectKey>tn.esprit.spring:Foyer</sonar.projectKey>
+        <sonar.projectName>Foyer</sonar.projectName>
+        <sonar.projectVersion>0.0.1-SNAPSHOT</sonar.projectVersion>
+        <sonar.host.url>http://192.168.117.128:9000</sonar.host.url>
+        <sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
     </properties>
     <dependencies>
         <dependency>
@@ -46,7 +51,19 @@
             <version>2.0.0</version>
         </dependency>
     </dependencies>
-
+    <distributionManagement>
+        <!-- Use separate repositories for releases and snapshots -->
+        <repository>
+            <id>nexusid</id>
+            <name>Release Repository</name>
+            <url>http://192.168.56.10:8081/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexusid</id>
+            <name>Snapshot Repository</name>
+            <url>http://192.168.56.10:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
     <build>
         <plugins>
             <plugin>
