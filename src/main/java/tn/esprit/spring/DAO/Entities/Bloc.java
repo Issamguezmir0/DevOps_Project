@@ -29,4 +29,11 @@ public class Bloc implements Serializable {
     @OneToMany(mappedBy = "bloc", fetch = FetchType.EAGER)
     @JsonIgnore
     List<Chambre> chambres= new ArrayList<>();
+
+    // Additional constructor with only idBloc and nomBloc
+    public Bloc(long idBloc, String nomBloc) {
+        this.idBloc = idBloc;
+        this.nomBloc = nomBloc;
+    }
+
 }

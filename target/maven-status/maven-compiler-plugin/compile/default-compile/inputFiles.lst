@@ -29,6 +29,7 @@ C:\Users\DELL\Documents\GitHub\DevOps_Project\src\main\java\tn\esprit\spring\DAO
 C:\Users\DELL\Documents\GitHub\DevOps_Project\src\main\java\tn\esprit\spring\DAO\Repositories\EtudiantRepository.java
 C:\Users\DELL\Documents\GitHub\DevOps_Project\src\main\java\tn\esprit\spring\Services\Foyer\FoyerService.java
 C:\Users\DELL\Documents\GitHub\DevOps_Project\src\main\java\tn\esprit\spring\Services\Reservation\ReservationService.java
+C:\Users\DELL\Documents\GitHub\DevOps_Project\src\main\java\tn\esprit\spring\Services\Chambre\ChambreServiceTest.java
 C:\Users\DELL\Documents\GitHub\DevOps_Project\src\main\java\tn\esprit\spring\RestControllers\ChambreRestController.java
 C:\Users\DELL\Documents\GitHub\DevOps_Project\src\main\java\tn\esprit\spring\Services\Chambre\IChambreService.java
 C:\Users\DELL\Documents\GitHub\DevOps_Project\src\main\java\tn\esprit\spring\Config\SpringDocConfig.java
