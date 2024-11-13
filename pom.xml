@@ -52,7 +52,6 @@
         </dependency>
     </dependencies>
     <distributionManagement>
-        <!-- Use separate repositories for releases and snapshots -->
         <repository>
             <id>nexusid</id>
             <name>Release Repository</name>
@@ -64,6 +63,7 @@
             <url>http://192.168.117.128:8081/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
+
     <build>
         <plugins>
             <plugin>
