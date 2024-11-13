@@ -10,10 +10,11 @@ pipeline {
     stages {
         stage('Getting code from GITHUB') {
             steps {
+                echo 'Configuring Git buffer size...'
+                sh 'git config --global http.postBuffer 524288000'
                 echo 'Pulling code from GitHub...'
                 git branch: 'moduleBloc-Sarra',
                     url: 'https://github.com/Issamguezmir0/DevOps_Project.git'
-                sh 'git config --global http.postBuffer 524288000'
             }
         }
 
