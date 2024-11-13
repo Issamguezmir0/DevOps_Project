@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     environment {
-        GIT_HTTP_BUFFER_SIZE = '524288000'
         DOCKER_IMAGE = "sarra24/foyerproject"
         DOCKER_TAG = "${BUILD_NUMBER}"
     }
