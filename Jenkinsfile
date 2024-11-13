@@ -92,7 +92,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'sonarqube-credentials', usernameVariable: 'SONAR_USER', passwordVariable: 'SONAR_PASS')]) {
                     echo 'Running SonarQube analysis...'
-                    timeout(time: 20, unit: 'MINUTES') {  // Adjust the timeout as needed
+                    timeout(time: 50, unit: 'MINUTES') {  // Adjust the timeout as needed
                         sh 'mvn sonar:sonar -Dsonar.login=$SONAR_USER -Dsonar.password=$SONAR_PASS -Dsonar.host.url=http://10.0.0.10:9000'
                     }
                 }
@@ -103,7 +103,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'nexuslogin', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
                     echo 'Deploying artifacts to Nexus...'
-                    timeout(time: 20, unit: 'MINUTES') {  // Adjust the timeout as needed
+                    timeout(time: 50, unit: 'MINUTES') {  // Adjust the timeout as needed
                         sh '''
                             mvn deploy \
                             -DskipTests \
