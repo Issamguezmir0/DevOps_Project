@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        GIT_HTTP_BUFFER_SIZE = '524288000'
+        GIT_HTTP_BUFFER_SIZE = '1048576000'
         DOCKER_IMAGE = "sarra24/foyerproject"
         DOCKER_TAG = "${BUILD_NUMBER}"
     }
@@ -10,8 +10,11 @@ pipeline {
     stages {
         stage('Getting code from GITHUB') {
             steps {
-                echo 'Configuring Git buffer size...'
-                sh 'git config --global http.postBuffer 524288000'
+                echo 'Configuring Git settings...'
+                sh '''
+                    git config --global http.postBuffer 1048576000
+                    git config --global core.compression 0
+                '''
                 echo 'Pulling code from GitHub...'
                 git branch: 'moduleBloc-Sarra',
                     url: 'https://github.com/Issamguezmir0/DevOps_Project.git'
@@ -109,7 +112,9 @@ pipeline {
 
     post {
         always {
-            sh 'docker logout'
+            node {
+                sh 'docker logout'
+            }
         }
     }
 }
