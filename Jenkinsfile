@@ -89,30 +89,33 @@ pipeline {
         }
 
         stage('MVN SONARQUBE') {
-              steps {
-                   withCredentials([usernamePassword(credentialsId: 'sonarqube-credentials', usernameVariable: 'SONAR_USER', passwordVariable: 'SONAR_PASS')]) {
-                        echo 'Running SonarQube analysis...'
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'sonarqube-credentials', usernameVariable: 'SONAR_USER', passwordVariable: 'SONAR_PASS')]) {
+                    echo 'Running SonarQube analysis...'
+                    timeout(time: 20, unit: 'MINUTES') {  // Adjust the timeout as needed
                         sh 'mvn sonar:sonar -Dsonar.login=$SONAR_USER -Dsonar.password=$SONAR_PASS -Dsonar.host.url=http://10.0.0.10:9000'
-                   }
-              }
+                    }
+                }
+            }
         }
-
 
         stage('Upload Artifacts to Nexus') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'nexuslogin', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
                     echo 'Deploying artifacts to Nexus...'
-                    sh '''
-                        mvn deploy \
-                        -DskipTests \
-                        -DaltDeploymentRepository=nexuslogin::default::http://10.0.0.10:8081/repository/maven-snapshots/ \
-                        -Dnexus.username="$NEXUS_USERNAME" \
-                        -Dnexus.password="$NEXUS_PASSWORD"
-                    '''
+                    timeout(time: 20, unit: 'MINUTES') {  // Adjust the timeout as needed
+                        sh '''
+                            mvn deploy \
+                            -DskipTests \
+                            -DaltDeploymentRepository=nexuslogin::default::http://10.0.0.10:8081/repository/maven-snapshots/ \
+                            -Dnexus.username="$NEXUS_USERNAME" \
+                            -Dnexus.password="$NEXUS_PASSWORD"
+                        '''
+                    }
                 }
             }
         }
-    }
+
 
     post {
         always {
