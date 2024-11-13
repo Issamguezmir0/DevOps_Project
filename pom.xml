@@ -22,7 +22,6 @@
         <sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
     </properties>
     <dependencies>
-        <!-- Vos dépendances actuelles -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -51,41 +50,20 @@
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>2.0.0</version>
         </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.9.0</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- Dépendances manquantes à ajouter -->
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>4.5.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.micrometer</groupId>
-            <artifactId>micrometer-registry-prometheus</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
     </dependencies>
-
     <distributionManagement>
-        <snapshotRepository>
-            <id>nexusid</id>
-            <url>http://192.168.117.128:8081/repository/maven-snapshots/</url>
-        </snapshotRepository>
+        <!-- Use separate repositories for releases and snapshots -->
         <repository>
             <id>nexusid</id>
-            <url>http://192.168.117.128:8081/repository/maven-releases/</url>
+            <name>Release Repository</name>
+            <url>http://192.168.56.10:8081/repository/maven-releases/</url>
         </repository>
+        <snapshotRepository>
+            <id>nexusid</id>
+            <name>Snapshot Repository</name>
+            <url>http://192.168.56.10:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
     </distributionManagement>
-
     <build>
         <plugins>
             <plugin>
@@ -100,35 +78,7 @@
                     </excludes>
                 </configuration>
             </plugin>
-
-            <!-- Plugins manquants à ajouter -->
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.10</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>report</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>3.3.1</version>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
+
 </project>

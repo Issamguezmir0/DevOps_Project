@@ -1,8 +1,8 @@
 package tn.esprit.spring.Services.Foyer;
 
-import tn.esprit.spring.DAO.Entities.Etudiant;
+
 import tn.esprit.spring.DAO.Entities.Foyer;
-import tn.esprit.spring.DAO.Entities.Reservation;
+
 import tn.esprit.spring.DAO.Entities.Universite;
 
 import java.util.List;
