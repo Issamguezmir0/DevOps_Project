@@ -52,17 +52,16 @@
         </dependency>
     </dependencies>
     <distributionManagement>
-        <repository>
-            <id>nexusid</id>
-            <name>Release Repository</name>
-            <url>http://192.168.117.128:8081/repository/maven-snapshots/</url>
-        </repository>
         <snapshotRepository>
-            <id>nexusid</id>
-            <name>Snapshot Repository</name>
+            <id>nexus-snapshots</id>
             <url>http://192.168.117.128:8081/repository/maven-snapshots/</url>
         </snapshotRepository>
+        <repository>
+            <id>nexus-releases</id>
+            <url>http://192.168.117.128:8081/repository/maven-releases/</url>
+        </repository>
     </distributionManagement>
+
 
     <build>
         <plugins>
