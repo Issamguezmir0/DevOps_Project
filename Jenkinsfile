@@ -82,12 +82,21 @@ pipeline {
         stage('Deploy with Docker Compose') {
             steps {
                 echo 'Starting Docker Compose...'
-                sh '''
-                    docker compose down || true
-                    docker compose up -d
-                '''
+                script {
+                    // Ensure that docker compose down finishes before proceeding
+                    sh 'docker compose down || true'
+
+                    // Adding a small sleep to allow time for containers to shut down
+                    sleep(time: 15, unit: 'SECONDS')  // Adjust time if needed
+
+                    // Set a timeout for the docker compose up command
+                    timeout(time: 5, unit: 'MINUTES') {
+                        sh 'docker compose up -d'
+                    }
+                }
             }
         }
+
 
         stage('Upload Artifacts to Nexus') {
             steps {
