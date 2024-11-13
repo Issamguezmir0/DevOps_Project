@@ -112,16 +112,15 @@ pipeline {
                     }
                 }
        }
-       stage('DOCKER COMPOSE') {
-                steps {
-                    // Placeholder step for Docker Compose
-                    sh '''
-                    docker compose up -d
-                    docker compose logs
-                    '''
+        stage('DOCKER COMPOSE') {
+            steps {
+                sh '''
+                docker-compose up -d
+                docker-compose logs
+                '''
+            }
+        }
 
-                }
-       }
 
    }
     post {
