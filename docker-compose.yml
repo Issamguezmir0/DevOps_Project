@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   mysqldb:
     image: mysql:8.0
@@ -20,16 +18,57 @@ services:
     ports:
       - "8089:8089"
     environment:
-      SPRING_APPLICATION_JSON: '{
-        "spring.datasource.url": "jdbc:mysql://mysqldb:3306/Foyer?createDatabaseIfNotExist=true",
-        "spring.datasource.username": "root",
-        "spring.datasource.password": "root",
-        "spring.jpa.show-sql": "false",
-        "spring.jpa.hibernate.ddl-auto": "update",
-        "spring.jpa.properties.hibernate.dialect": "org.hibernate.dialect.MySQL8Dialect",
-        "server.port": "8089",
-        "server.servlet.context-path": "/Foyer"
-      }'
+    - SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:3306/Foyer?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    - SPRING_DATASOURCE_USERNAME=root
+    - SPRING_DATASOURCE_PASSWORD=root
+    - SPRING_JPA_SHOW_SQL=false
+    - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    - SERVER_PORT=8089
+    - SERVER_ADDRESS=0.0.0.0
+    - SERVER_SERVLET_CONTEXT_PATH=/Foyer
+    - MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE=*
+    - MANAGEMENT_ENDPOINT_PROMETHEUS_ENABLED=true
+    - MANAGEMENT_ENDPOINTS_WEB_BASE_PATH=/actuator
+    - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
+    - MANAGEMENT_ENDPOINT_HEALTH_SHOW_DETAILS=always
+    - SPRING_SECURITY_USER_PASSWORD=none
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+
+  nexus:
+    image: sonatype/nexus3
+    container_name: nexus
+    ports:
+      - "8081:8081"
+
+  sonarqube:
+    image: sonarqube:8.9.7-community
+    container_name: sonarqube
+    ports:
+      - "9000:9000"
+    environment:
+      - SONAR_JDBC_USERNAME=sonar
+      - SONAR_JDBC_PASSWORD=sonar
 
 volumes:
   db_data:
+  prometheus_data:
+  sonar_data:
+  nexus_data:
+  grafana_data:
