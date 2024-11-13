@@ -55,7 +55,7 @@
         <repository>
             <id>nexusid</id>
             <name>Release Repository</name>
-            <url>http://192.168.117.128:8081/repository/maven-releases/</url>
+            <url>http://192.168.117.128:8081/repository/maven-snapshots/</url>
         </repository>
         <snapshotRepository>
             <id>nexusid</id>
