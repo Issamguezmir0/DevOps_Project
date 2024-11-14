@@ -157,5 +157,20 @@ public class ReservationService implements IReservationService {
             log.info("La reservation "+ reservation.getIdReservation()+" est annulée automatiquement");
         }
     }
+@Override
+public void extendReservationValidity(String reservationId, int additionalDays) {
+    Reservation reservation = repo.findById(reservationId).orElse(null);
+    if (reservation != null && reservation.isEstValide()) {
+        reservation.setAnneeUniversitaire(reservation.getAnneeUniversitaire().plusDays(additionalDays));
+        repo.save(reservation);
+        log.info("Reservation " + reservationId + " validity extended by " + additionalDays + " days.");
+    } else {
+        log.warn("Reservation " + reservationId + " is not valid or does not exist.");
+    }
+}
+@Override
+public List<Reservation> findReservationsByStudentCin(long cin) {
+    return repo.findByEtudiantsCin(cin);
+}
 
 }

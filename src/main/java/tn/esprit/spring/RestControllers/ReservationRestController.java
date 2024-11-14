@@ -55,4 +55,18 @@ public class ReservationRestController {
     String annulerReservation(@RequestParam long cinEtudiant) {
         return service.annulerReservation(cinEtudiant);
     }
+
+
+    @PostMapping("extendReservationValidity")
+    public void extendReservationValidity(@RequestParam String reservationId, @RequestParam int additionalDays) {
+    service.extendReservationValidity(reservationId, additionalDays);
+}
+
+
+@GetMapping("findReservationsByStudentCin")
+public List<Reservation> findReservationsByStudentCin(@RequestParam long cin) {
+    return service.findReservationsByStudentCin(cin);
+}
+
+
 }

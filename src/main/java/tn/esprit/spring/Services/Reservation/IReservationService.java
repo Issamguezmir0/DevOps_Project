@@ -20,6 +20,8 @@ public interface IReservationService {
     void annulerReservations();
 
 
+    void extendReservationValidity(String reservationId, int additionalDays);
+    List<Reservation> findReservationsByStudentCin(long cin);
 
 
 }
