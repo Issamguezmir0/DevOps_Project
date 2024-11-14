@@ -35,5 +35,4 @@ public interface ChambreRepository extends JpaRepository<Chambre, Long> {
     long countChambreByTypeC(TypeChambre typeChambre);
 
     long countReservationsByIdChambreAndReservationsEstValideAndReservationsAnneeUniversitaireBetween(long idChambre, boolean estValide, LocalDate dateDebut, LocalDate dateFin);
-//    List<Chambre> findAllByNumeroChambre(List<Long> num);
 }

@@ -59,11 +59,6 @@ public class ChambreService implements IChambreService {
     @Override
     public List<Chambre> getChambresNonReserveParNomFoyerEtTypeChambre(String nomFoyer, TypeChambre type) {
 
-        // Afficher les chambres non réservée, par typeChambre,
-        // appartenant à un foyer donné par son nom, effectué durant
-        // l’année universitaire actuelle.
-
-        // Début "récuperer l'année universitaire actuelle"
         LocalDate dateDebutAU;
         LocalDate dateFinAU;
         int numReservation;
@@ -75,23 +70,22 @@ public class ChambreService implements IChambreService {
             dateDebutAU = LocalDate.of(Integer.parseInt("20" + year), 9, 15);
             dateFinAU = LocalDate.of(Integer.parseInt("20" + (year + 1)), 6, 30);
         }
-        // Fin "récuperer l'année universitaire actuelle"
         List<Chambre> listChambreDispo = new ArrayList<>();
         for (Chambre c : repo.findAll()) {
             if (c.getTypeC().equals(type) && c.getBloc().getFoyer().getNomFoyer().equals(nomFoyer)) { // Les chambres du foyer X et qui ont le type Y
                 numReservation = 0;
-                // nchoufou les réservations mta3 AU hethy binesba lil bit heki
                 for (Reservation reservation : c.getReservations()) {
                     if (reservation.getAnneeUniversitaire().isBefore(dateFinAU) && reservation.getAnneeUniversitaire().isAfter(dateDebutAU)) {
                         numReservation++;
                     }
                 }
-                // nvérifi bil type w nombre des places elli l9ahom fer8in fi kol bit
                 if (c.getTypeC().equals(TypeChambre.SIMPLE) && numReservation == 0) {
                     listChambreDispo.add(c);
-                } else if (c.getTypeC().equals(TypeChambre.DOUBLE) && numReservation < 2) {
+                }
+                else if (c.getTypeC().equals(TypeChambre.DOUBLE) && numReservation < 2) {
                     listChambreDispo.add(c);
-                } else if (c.getTypeC().equals(TypeChambre.TRIPLE) && numReservation < 3) {
+                }
+                else if (c.getTypeC().equals(TypeChambre.TRIPLE) && numReservation < 3) {
                     listChambreDispo.add(c);
                 }
             }

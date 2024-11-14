@@ -62,17 +62,6 @@ class BlocServiceTest {
         verify(blocRepository, times(1)).findBlocsByTypeChambreGroupedByCapacity(typeChambre);
     }
 
-    /*@Test
-    void testAddOrUpdate() {
-        Bloc bloc = new Bloc(1L, "BlocTest", 10, null, null);
-        when(blocRepository.save(bloc)).thenReturn(bloc);
-
-        Bloc result = blocService.addOrUpdate(bloc);
-
-        assertEquals(bloc.getNomBloc(), result.getNomBloc());
-        verify(blocRepository, times(1)).save(bloc);
-    }*/
-
     @Test
     void testFindAll() {
         List<Bloc> expectedBlocs = Arrays.asList(

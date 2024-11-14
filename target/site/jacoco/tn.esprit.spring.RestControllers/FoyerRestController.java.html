@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FoyerRestController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Foyer</a> &gt; <a href="index.source.html" class="el_package">tn.esprit.spring.RestControllers</a> &gt; <span class="el_source">FoyerRestController.java</span></div><h1>FoyerRestController.java</h1><pre class="source lang-java linenums">package tn.esprit.spring.RestControllers;
+
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+import tn.esprit.spring.DAO.Entities.Etudiant;
+import tn.esprit.spring.DAO.Entities.Foyer;
+import tn.esprit.spring.DAO.Entities.Universite;
+import tn.esprit.spring.Services.Etudiant.IEtudiantService;
+import tn.esprit.spring.Services.Foyer.IFoyerService;
+
+import java.util.List;
+
+@RestController
+@RequestMapping(&quot;foyer&quot;)
+<span class="nc" id="L15">@AllArgsConstructor</span>
+public class FoyerRestController {
+    IFoyerService service;
+
+    @PostMapping(&quot;addOrUpdate&quot;)
+    Foyer addOrUpdate(@RequestBody Foyer f) {
+<span class="nc" id="L21">        return service.addOrUpdate(f);</span>
+    }
+
+    @GetMapping(&quot;findAll&quot;)
+    List&lt;Foyer&gt; findAll() {
+<span class="nc" id="L26">        return service.findAll();</span>
+    }
+
+    @GetMapping(&quot;findById&quot;)
+    Foyer findById(@RequestParam long id) {
+<span class="nc" id="L31">        return service.findById(id);</span>
+    }
+
+    @DeleteMapping(&quot;delete&quot;)
+    void delete(@RequestBody Foyer f) {
+<span class="nc" id="L36">        service.delete(f);</span>
+<span class="nc" id="L37">    }</span>
+
+    @DeleteMapping(&quot;deleteById&quot;)
+    void deleteById(@RequestParam long id) {
+<span class="nc" id="L41">        service.deleteById(id);</span>
+<span class="nc" id="L42">    }</span>
+
+    @PutMapping(&quot;affecterFoyerAUniversite&quot;)
+    Universite affecterFoyerAUniversite(@RequestParam long idFoyer, @RequestParam String nomUniversite) {
+<span class="nc" id="L46">        return service.affecterFoyerAUniversite(idFoyer, nomUniversite);</span>
+    }
+
+    @PutMapping(&quot;desaffecterFoyerAUniversite&quot;)
+    Universite desaffecterFoyerAUniversite(@RequestParam long idUniversite){
+<span class="nc" id="L51">        return service.desaffecterFoyerAUniversite(idUniversite);</span>
+    }
+
+    @PostMapping(&quot;ajouterFoyerEtAffecterAUniversite&quot;)
+    public Foyer ajouterFoyerEtAffecterAUniversite(@RequestBody Foyer foyer,@RequestParam long idUniversite) {
+<span class="nc" id="L56">        return service.ajouterFoyerEtAffecterAUniversite(foyer,idUniversite);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
