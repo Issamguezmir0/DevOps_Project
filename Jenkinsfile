@@ -99,15 +99,7 @@ pipeline {
                  }
              }
        }
-       stage('Deploy with Docker Compose') {
-              steps {
-                       echo 'Starting Docker Compose...'
-                       sh '''
-                           docker compose down || true
-                           docker compose up -d
-                       '''
-              }
-       }
+       
        stage('MVN SONARQUBE') {
                 steps {
                     withCredentials([usernamePassword(credentialsId: 'sonarqube-credentials', usernameVariable: 'SONAR_USER', passwordVariable: 'SONAR_PASS')]) {
